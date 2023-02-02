@@ -6,14 +6,20 @@ const Board = () => {
     [...Array(9)].map((_, i) => i.toString())
   );
 
+  const [xisNext, setXisNext] = React.useState(true);
+
   const handleClick = (i: number) => {
     const squaresCopy = squares.slice();
-    squaresCopy[i] = "X";
+    squaresCopy[i] = xisNext ? "X" : "O";
     setSquare(squaresCopy);
+    setXisNext(!xisNext);
   };
+
+  const status = "Next player: " + (xisNext ? "X" : "O");
 
   return (
     <div>
+      <div className="status">{status}</div>
       <div className="board-row">
         <Square
           value={squares[0]}
