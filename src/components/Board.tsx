@@ -1,5 +1,6 @@
 import React from "react";
 import Square from "./Square";
+import { calculateWinner } from "../helpers/calculateWinner";
 
 const Board = () => {
   const [squares, setSquare] = React.useState(
@@ -10,12 +11,17 @@ const Board = () => {
 
   const handleClick = (i: number) => {
     const squaresCopy = squares.slice();
+    if (calculateWinner(squaresCopy) || squaresCopy[i] !== i.toString()) return;
     squaresCopy[i] = xisNext ? "X" : "O";
+
     setSquare(squaresCopy);
     setXisNext(!xisNext);
   };
 
-  const status = "Next player: " + (xisNext ? "X" : "O");
+  const winner = calculateWinner(squares);
+  const status = winner
+    ? `Winner: ${winner}`
+    : `Next player: ${xisNext ? "X" : "O"}`;
 
   return (
     <div>
