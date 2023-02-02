@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 
-const Square = ({ value }: { value: string }) => {
-  const [value2, setValue2] = useState(value);
+const Square = ({ value, onClick }: { value: string; onClick: () => void }) => {
   return (
-    <button
-      className="square"
-      onClick={() => {
-        setValue2("X");
-      }}
-    >
-      {value2}
+    <button className="square" onClick={onClick}>
+      {value}
     </button>
   );
 };
